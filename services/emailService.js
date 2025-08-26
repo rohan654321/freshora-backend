@@ -22,17 +22,20 @@ class EmailService {
       .join("\n")
 
     // Send customer email (brochure style)
-    const customerMailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: customerEmail,
-      subject: `🧺 Order Confirmation - ${orderNumber} | Your Laundry is in Good Hands!`,
-      html: this.generateCustomerBrochureHTML(customerName, orderNumber, orderDetails),
-    }
+   const fromEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || "freshorappc@gmail.com";
+
+const customerMailOptions = {
+  from: fromEmail,
+  to: customerEmail,
+  subject: `🧺 Order Confirmation - ${orderNumber} | Your Laundry is in Good Hands!`,
+  html: this.generateCustomerBrochureHTML(customerName, orderNumber, orderDetails),
+}
+
 
     // Send business notification email
     const businessMailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_FROM, // Business email
+      from: fromEmail,
+      to: fromEmail, // Business email
       subject: `📋 New Order Received - ${orderNumber}`,
       html: this.generateBusinessNotificationHTML(customerName, orderNumber, orderDetails),
     }
