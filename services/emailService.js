@@ -4,9 +4,10 @@ class EmailService {
   constructor() {
     this.transporter = nodemailer.createTransport({
       service: "gmail",
+      secure: "false",
       auth: {
-        user: process.env.EMAIL_USER || "mondalrohan201@gmail.com",
-        pass: process.env.GMAIL_APP_PASSWORD || "lczr wrpu dtld mmht", // Gmail App Password
+        user: process.env.EMAIL_USER || "freshorappc@gmail.com",
+        pass: process.env.GMAIL_APP_PASSWORD || "ykbl euac vysy dpta", // Gmail App Password
       },
     })
   }
@@ -22,17 +23,20 @@ class EmailService {
       .join("\n")
 
     // Send customer email (brochure style)
-    const customerMailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: customerEmail,
-      subject: `🧺 Order Confirmation - ${orderNumber} | Your Laundry is in Good Hands!`,
-      html: this.generateCustomerBrochureHTML(customerName, orderNumber, orderDetails),
-    }
+   const fromEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || "freshorappc@gmail.com";
+
+const customerMailOptions = {
+  from: fromEmail,
+  to: customerEmail,
+  subject: `🧺 Order Confirmation - ${orderNumber} | Your Laundry is in Good Hands!`,
+  html: this.generateCustomerBrochureHTML(customerName, orderNumber, orderDetails),
+}
+
 
     // Send business notification email
     const businessMailOptions = {
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_FROM, // Business email
+      from: fromEmail,
+      to: fromEmail, // Business email
       subject: `📋 New Order Received - ${orderNumber}`,
       html: this.generateBusinessNotificationHTML(customerName, orderNumber, orderDetails),
     }
