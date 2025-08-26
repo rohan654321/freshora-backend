@@ -10,7 +10,7 @@ class EmailService {
       },
     })
   }
-
+  
   async sendOrderConfirmation({ customerEmail, customerName, orderNumber, orderDetails }) {
     const { service, pickupDate, deliveryDate, totalAmount, items, specialInstructions, customerInfo } = orderDetails
 
