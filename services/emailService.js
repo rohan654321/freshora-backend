@@ -5,12 +5,12 @@ class EmailService {
     this.transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER || "mondalrohan201@gmail.com",
-        pass: process.env.GMAIL_APP_PASSWORD || "lczr wrpu dtld mmht", // Gmail App Password
+        user: process.env.EMAIL_USER || "freshorappc@gmail.com",
+        pass: process.env.GMAIL_APP_PASSWORD || "ykbl euac vysy dpta", // Gmail App Password
       },
     })
   }
-  
+
   async sendOrderConfirmation({ customerEmail, customerName, orderNumber, orderDetails }) {
     const { service, pickupDate, deliveryDate, totalAmount, items, specialInstructions, customerInfo } = orderDetails
 
