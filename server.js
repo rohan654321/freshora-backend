@@ -12,10 +12,12 @@ const prisma = new PrismaClient()
 
 // Middleware
 app.use(
+app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
-  }),
+    origin: "*",
+    credentials: true, // allow all origins
+  })
+)
 )
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
